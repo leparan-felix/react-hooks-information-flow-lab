@@ -4,13 +4,15 @@ import Header from "../components/Header";
 
 test("displays the toggle button", () => {
   render(<Header />);
-  expect(screen.queryByText(/ Mode/)).toBeInTheDocument();
+  // Use getByText or getByRole with specific text for better reliability
+  expect(screen.getByRole('button', { name: /Mode/ })).toBeInTheDocument();
 });
 
 test("calls the onDarkModeClick callback prop when the button is clicked", () => {
   const onDarkModeClick = jest.fn();
   render(<Header onDarkModeClick={onDarkModeClick} />);
 
-  fireEvent.click(screen.queryByText(/ Mode/));
+  // Click the button and ensure the callback is called
+  fireEvent.click(screen.getByRole('button', { name: /Mode/ }));
   expect(onDarkModeClick).toHaveBeenCalled();
 });
